@@ -25,6 +25,7 @@ class AddForm extends Component {
         this.state = {
             value: ''
         };
+        this.handleChange = this.handleChange.bind(this);
     }
    render () { 
     return(               
@@ -34,24 +35,23 @@ class AddForm extends Component {
                     <Form>
                         <FormGroup>
                             <Label for="exampleText"><h3>Add a new item to your list:</h3></Label>
-                            <Input type="textarea" name="text" id="exampleText" onChange={(e) => this.onChange(`${e.target.value}`)} />
+                            <Input type="textarea" name="text" id="exampleText" onChange={this.handleChange} value = {this.state.value} />
                          </FormGroup>
                     </Form>  
                 </p>
                 <br/>
-                <Button color="success" onClick={this.addItemToList} >Add item</Button>{' '}
+                <Button color="success" onClick={this.addItemToList} >Add item</Button>
             </Col>
         </Row>
      
     )}
 
-    onChange(value) {
-        
-
+    handleChange(event) {
+        this.setState({value: event.target.value});
     };
 
     addItemToList() {
-        alert(Input.value);
+        alert('A name was submitted: ' + this.state.value);
 
     };
 }
