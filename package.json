@@ -5,8 +5,11 @@
   "dependencies": {
     "bootstrap": "^4.1.1",
     "immutable": "^3.8.2",
+    "path-to-regexp": "^2.2.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "reactstrap": "^6.2.0"
   },

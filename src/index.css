@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.active {
+  color: black;
+}
+
+.link {
+  color: mediumpurple;
+}
+
