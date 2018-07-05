@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
+import {} from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
 
 ReactDOM.render((<BrowserRouter>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {
     Collapse,
     Navbar,
@@ -14,18 +13,20 @@ import {
     Jumbotron,
     Button,
     InputGroup, InputGroupAddon, InputGroupText, Input,
-    Form, FormGroup, Label, FormText,
+    Form, FormGroup, Label,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {} from 'immutable';
-import {Route, Switch, Link} from 'react-router-dom'
+import {Route, Switch, Link} from 'react-router-dom';
+import {} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
 
 
 const Main = () => (
     <main>
         <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/add' component={AddForm}/>
+            {/*<Route path='/add' component={AddForm}/>*/}
         </Switch>
     </main>
 );
@@ -64,41 +65,40 @@ class Header extends Component {
     }
 };
 
-class Home extends Component {
+class ListOfItems extends Component {     //компонент-представлние (список дел)
+    constructor(props) {
+        super(props);
+    }
+
+    createListItem = (item) => {
+        return(
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <Input addon type="checkbox"
+                                   aria-label="Checkbox for following text input"/>
+                        </InputGroupText>
+                    </InputGroupAddon>
+                    <Input onChange={this.props.handleChange} defaultValue={item.value}/>
+                </InputGroup>
+        );
+    };
+
     render() {
         return (
-            <div>
-                <Jumbotron>
-                    <Container id="container">
-                        <Row>
-                            <Col>
-                                <h1>To do:</h1>
-                                <br/>
-                                <p>
-                                    <InputGroup>
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <Input addon type="checkbox"
-                                                       aria-label="Checkbox for following text input"/>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                       <Input value="Wash the dishes"/>
-                                    </InputGroup>
-                                </p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Jumbotron>
-            </div>
+            <p className="item-list">
+                {this.props.items.map(this.createListItem)}
+            </p>
         );
     }
 }
 
-class AddForm extends Component {
+class Home extends Component {  //компонент-контейнер
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: '',
+            items: [],
         };
     }
 
@@ -106,8 +106,15 @@ class AddForm extends Component {
         this.setState({value: event.target.value});
     };
 
+
     addItemToList = () => {
-        alert('A name was submitted: ' + this.state.value);
+
+        let newState = Object.assign({}, this.state);
+        let item = {value: this.state.value};
+        newState.items.push(item);
+        newState.value = '';
+        this.setState(newState);
+
 
     };
 
@@ -119,17 +126,32 @@ class AddForm extends Component {
                     <Container id="container">
                         <Row>
                             <Col>
+                                <Jumbotron className="insideJum" style = {{backgroundColor: 'mediumPurple'}}>
+                                    <Container>
                                 <p>
                                     <Form>
                                         <FormGroup>
-                                            <Label for="exampleText"><h3>Add a new item to your list:</h3></Label>
+                                            <Label for="exampleText" style = {{color: 'white', textShadow: "1px 1px 2px black"}}><h3>Add a new item to your list:</h3></Label>
                                             <Input type="textArea" name="text" id="exampleText"
                                                    onChange={this.handleChange} value={this.state.value}/>
                                         </FormGroup>
                                     </Form>
                                 </p>
-                                <br/>
-                                <Button color="success" onClick={this.addItemToList}>Add item</Button>
+                                        <br/>
+                                        <Button color="secondary" onClick={this.addItemToList}>Add item</Button>
+                                        <br/>
+                                    </Container>
+                                </Jumbotron>
+
+
+                            </Col>
+                            <Col>
+                                <Jumbotron style = {{backgroundColor: 'lightGrey'}}>
+                                <Label for='list'><h3>To Do:</h3></Label>
+                                <p>
+                                    <ListOfItems id = "list" items={this.state.items} handleChange={this.handleChange}/>
+                                </p>
+                                </Jumbotron>
                             </Col>
                         </Row>
                     </Container>
