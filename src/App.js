@@ -71,16 +71,16 @@ class ListOfItems extends Component {     //компонент-представ�
     }
 
     createListItem = (item) => {
-        return(
-                <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                            <Input addon type="checkbox"
-                                   aria-label="Checkbox for following text input"/>
-                        </InputGroupText>
-                    </InputGroupAddon>
-                    <Input onChange={this.props.handleChange} defaultValue={item.value}/>
-                </InputGroup>
+        return (
+            <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                        <Input addon type="checkbox"
+                               aria-label="Checkbox for following text input"/>
+                    </InputGroupText>
+                </InputGroupAddon>
+                <Input key = {item.id} onChange={this.props.handleChange} defaultValue={item.value}/>
+            </InputGroup>
         );
     };
 
@@ -99,6 +99,7 @@ class Home extends Component {  //компонент-контейнер
         this.state = {
             value: '',
             items: [],
+            id: 0,
         };
     }
 
@@ -106,13 +107,21 @@ class Home extends Component {  //компонент-контейнер
         this.setState({value: event.target.value});
     };
 
+    handleChangeItems = (event) => {
+        this.setState({value: event.target.value});
+        let newState = Object.assign({}, this.state);
+        //let item = newState.items.find((item) => {if(item.id===itemId){return item}});
+        this.setState(newState);
+    };
+
 
     addItemToList = () => {
 
         let newState = Object.assign({}, this.state);
-        let item = {value: this.state.value};
+        let item = {value: this.state.value, id: this.state.id};
         newState.items.push(item);
         newState.value = '';
+        newState.id++;
         this.setState(newState);
 
 
@@ -126,17 +135,19 @@ class Home extends Component {  //компонент-контейнер
                     <Container id="container">
                         <Row>
                             <Col>
-                                <Jumbotron className="insideJum" style = {{backgroundColor: 'mediumPurple'}}>
+                                <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
                                     <Container>
-                                <p>
-                                    <Form>
-                                        <FormGroup>
-                                            <Label for="exampleText" style = {{color: 'white', textShadow: "1px 1px 2px black"}}><h3>Add a new item to your list:</h3></Label>
-                                            <Input type="textArea" name="text" id="exampleText"
-                                                   onChange={this.handleChange} value={this.state.value}/>
-                                        </FormGroup>
-                                    </Form>
-                                </p>
+                                        <p>
+                                            <Form>
+                                                <FormGroup>
+                                                    <Label for="exampleText"
+                                                           style={{color: 'white', textShadow: "1px 1px 2px black"}}>
+                                                        <h3>Add a new item to your list:</h3></Label>
+                                                    <Input type="textArea" name="text" id="exampleText"
+                                                           onChange={this.handleChange} value={this.state.value}/>
+                                                </FormGroup>
+                                            </Form>
+                                        </p>
                                         <br/>
                                         <Button color="secondary" onClick={this.addItemToList}>Add item</Button>
                                         <br/>
@@ -146,11 +157,12 @@ class Home extends Component {  //компонент-контейнер
 
                             </Col>
                             <Col>
-                                <Jumbotron style = {{backgroundColor: 'lightGrey'}}>
-                                <Label for='list'><h3>To Do:</h3></Label>
-                                <p>
-                                    <ListOfItems id = "list" items={this.state.items} handleChange={this.handleChange}/>
-                                </p>
+                                <Jumbotron style={{backgroundColor: 'lightGrey'}}>
+                                    <Label for='list'><h3>To Do:</h3></Label>
+                                    <p>
+                                        <ListOfItems id="list" items={this.state.items}
+                                                     handleChange={this.handleChangeItems}/>
+                                    </p>
                                 </Jumbotron>
                             </Col>
                         </Row>
