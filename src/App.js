@@ -16,10 +16,11 @@ import {
     Form, FormGroup, Label,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {} from 'immutable';
 import {Route, Switch, Link} from 'react-router-dom';
-import {} from 'react-redux';
-import {createStore, combineReducers} from 'redux';
+import AddForm from './AddForm'
+
+import VisibleTodoList from './VisibleTodoList'
+import { addTodo } from './actions'
 
 
 const Main = () => (
@@ -63,69 +64,27 @@ class Header extends Component {
                 </Navbar>
             </header>)
     }
-};
-
-class ListOfItems extends Component {     //компонент-представлние (список дел)
-    constructor(props) {
-        super(props);
-    }
-
-    createListItem = (item) => {
-        return (
-            <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                        <Input addon type="checkbox"
-                               aria-label="Checkbox for following text input"/>
-                    </InputGroupText>
-                </InputGroupAddon>
-                <Input key = {item.id} onChange={this.props.handleChange} defaultValue={item.value}/>
-            </InputGroup>
-        );
-    };
-
-    render() {
-        return (
-            <p className="item-list">
-                {this.props.items.map(this.createListItem)}
-            </p>
-        );
-    }
 }
 
+
+export class Item extends Component {
+    render() {
+    return (
+        <InputGroup>
+            <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                    <Input addon type="checkbox"
+                           aria-label="Checkbox for following text input"/>
+                </InputGroupText>
+            </InputGroupAddon>
+            <Input  defaultValue={this.props.item.text}/>
+        </InputGroup>
+    );}
+}
+
+
+
 class Home extends Component {  //компонент-контейнер
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: '',
-            items: [],
-            id: 0,
-        };
-    }
-
-    handleChange = (event) => {
-        this.setState({value: event.target.value});
-    };
-
-    handleChangeItems = (event) => {
-        this.setState({value: event.target.value});
-        let newState = Object.assign({}, this.state);
-        //let item = newState.items.find((item) => {if(item.id===itemId){return item}});
-        this.setState(newState);
-    };
-
-
-    addItemToList = () => {
-
-        let newState = Object.assign({}, this.state);
-        let item = {value: this.state.value, id: this.state.id};
-        newState.items.push(item);
-        newState.value = '';
-        newState.id++;
-        this.setState(newState);
-
-
-    };
 
     render() {
         return (
@@ -138,30 +97,16 @@ class Home extends Component {  //компонент-контейнер
                                 <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
                                     <Container>
                                         <p>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText"
-                                                           style={{color: 'white', textShadow: "1px 1px 2px black"}}>
-                                                        <h3>Add a new item to your list:</h3></Label>
-                                                    <Input type="textArea" name="text" id="exampleText"
-                                                           onChange={this.handleChange} value={this.state.value}/>
-                                                </FormGroup>
-                                            </Form>
+                                           <AddForm/>
                                         </p>
-                                        <br/>
-                                        <Button color="secondary" onClick={this.addItemToList}>Add item</Button>
-                                        <br/>
                                     </Container>
                                 </Jumbotron>
-
-
                             </Col>
                             <Col>
                                 <Jumbotron style={{backgroundColor: 'lightGrey'}}>
                                     <Label for='list'><h3>To Do:</h3></Label>
                                     <p>
-                                        <ListOfItems id="list" items={this.state.items}
-                                                     handleChange={this.handleChangeItems}/>
+                                        <VisibleTodoList />
                                     </p>
                                 </Jumbotron>
                             </Col>
@@ -176,7 +121,7 @@ class Home extends Component {  //компонент-контейнер
 
 }
 
-export default class App extends Component {
+class App extends Component {
 
     render() {
         return (
@@ -187,4 +132,7 @@ export default class App extends Component {
         );
     }
 }
+
+export default App;
+
 
