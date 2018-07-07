@@ -6,7 +6,7 @@ import {
     Form, FormGroup, Label,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {addTodo} from "./actions";
+import {addTodo} from "../actions/actions";
 
 import {connect} from 'react-redux';
 
@@ -39,22 +39,21 @@ class AddForm extends Component {
                         this.props.addTodo(this.state.value);
                         this.setState({value: ''});
                     }}>Add item</Button>
-                        <br/>
-                        </Form>
-                        </div>
-                        )}
-                    }
+                    <br/>
+                </Form>
+            </div>
+        )
+    }
+}
 
-                    const mapStateToProps=(state, ownProps) => ({
+const mapStateToProps = () => ({});
 
-                });
-
-                    const mapDispatchToProps=dispatch => ({
-                    addTodo: text => dispatch(addTodo(text))
-                });
+const mapDispatchToProps = dispatch => ({
+    addTodo: text => dispatch(addTodo(text))
+});
 
 AddForm.propTypes = {
     addTodo: PropTypes.func,
 };
 
-                    export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm)

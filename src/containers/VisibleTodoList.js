@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 //import { toggleTodo } from './actions'
-import ListOfItems from './ListOfItems'
+import ListOfItems from '../components/ListOfItems'
 import React, {Component} from "react";
 //import { VisibilityFilters } from './actions'
-import {Item} from "./App"
+import {Item} from "../components/App"
 
 /*const getVisibleTodos = (todos, filter) => {
     switch (filter) {

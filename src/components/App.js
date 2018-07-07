@@ -17,10 +17,10 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Switch, Link} from 'react-router-dom';
-import AddForm from './AddForm'
+import AddForm from '../containers/AddForm'
 
-import VisibleTodoList from './VisibleTodoList'
-import { addTodo } from './actions'
+import VisibleTodoList from '../containers/VisibleTodoList'
+import { addTodo } from '../actions/actions'
 
 
 const Main = () => (

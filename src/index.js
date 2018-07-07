@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import {BrowserRouter} from 'react-router-dom'
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './components/registerServiceWorker';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import todos from './reducers'
+import todos from './reducers/reducers'
 
 const store = createStore(todos);
 
