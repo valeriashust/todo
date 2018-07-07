@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {Item} from "./App"
+import Item from "../components/Item"
 
-class ListOfItems extends Component {     //компонент-представлние (список дел)
+export default class ListOfItems extends Component {     //компонент-представлние (список дел)
+
     render() {
         return (
             <p className="item-list">
@@ -9,6 +10,4 @@ class ListOfItems extends Component {     //компонент-представ�
             </p>
         );
     }
-}
-
-export default ListOfItems;
+};

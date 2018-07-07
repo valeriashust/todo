@@ -7,10 +7,10 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {addTodo} from "../actions/actions";
-
 import {connect} from 'react-redux';
 
 class AddForm extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
