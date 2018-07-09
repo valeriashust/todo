@@ -8,26 +8,25 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import VisibleTodoList from "../containers/VisibleTodoList";
-import AddForm from "../containers/AddForm";
+import Footer from "./Footer";
 
 export default class Home extends Component {  //компонент-контейнер
 
     render() {
         return (
             <div>
-
                 <Jumbotron>
                     <Container id="container">
                         <Row>
                             <Col>
-                                <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
-                                    <Container>
-                                        <p>
-                                            <AddForm/>
-                                        </p>
-                                    </Container>
-                                </Jumbotron>
                             </Col>
+                            <Col sm={{size: 'auto', offset: 1}}>
+                                <Footer/>
+                            </Col>
+
+                        </Row>
+                        <br/>
+                        <Row>
                             <Col>
                                 <Jumbotron style={{backgroundColor: 'lightGrey'}}>
                                     <Label for='list'><h3>To Do:</h3></Label>
@@ -37,6 +36,7 @@ export default class Home extends Component {  //компонент-контей
                                 </Jumbotron>
                             </Col>
                         </Row>
+
                     </Container>
                 </Jumbotron>
             </div>

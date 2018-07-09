@@ -1,10 +1,9 @@
 import {connect} from 'react-redux'
 import ListOfItems from '../components/ListOfItems'
-import React from "react";
-//import { VisibilityFilters } from './actions'
+import {deleteTodo, toggleTodo, updateTodo, VisibilityFilters} from '../actions/actions'
 
 
-/*const getVisibleTodos = (todos, filter) => {
+export const getVisibleTodos = (todos, filter) => {
     switch (filter) {
         case VisibilityFilters.SHOW_ALL:
             return todos;
@@ -15,11 +14,18 @@ import React from "react";
         default:
             throw new Error('Unknown filter: ' + filter)
     }
-};*/
+};
 
 
 const mapStateToProps = state => ({
-    items: state
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
 });
 
-export default connect(mapStateToProps)(ListOfItems)
+const mapDispatchToProps = dispatch => ({
+    toggleTodo: id => dispatch(toggleTodo(id)),
+    deleteTodo: id => dispatch(deleteTodo(id)),
+    updateTodo: (text, id) => dispatch(updateTodo(text, id)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListOfItems)

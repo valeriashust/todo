@@ -6,9 +6,9 @@ import {BrowserRouter} from 'react-router-dom'
 import registerServiceWorker from './components/registerServiceWorker';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import todos from './reducers/reducers'
+import todoApp from './reducers/reducers'
 
-const store = createStore(todos);
+const store = createStore(todoApp);
 
 
 ReactDOM.render((<BrowserRouter>

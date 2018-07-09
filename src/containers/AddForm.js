@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {
     Button,
     Input,
-    Form, FormGroup, Label,
+    Form, FormGroup, Label, Col, Jumbotron, Container,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {addTodo} from "../actions/actions";
@@ -21,39 +20,38 @@ class AddForm extends Component {
     render() {
         return (
             <div>
-                <Form>
-                    <FormGroup>
-                        <Label for="exampleText"
-                               style={{color: 'white', textShadow: "1px 1px 2px black"}}>
-                            <h3>Add a new item to your list:</h3></Label>
-                        <Input type="textArea" name="text" id="exampleText" onChange={(event) => {
-                            this.setState({value: event.target.value});
-                        }} value={this.state.value}/>
-                    </FormGroup>
-                    <br/>
-                    <Button color="secondary" onClick={e => {
-                        e.preventDefault();
-                        if (!this.state.value.trim()) {
-                            return
-                        }
-                        this.props.addTodo(this.state.value);
-                        this.setState({value: ''});
-                    }}>Add item</Button>
-                    <br/>
-                </Form>
+                <Col>
+                    <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
+                        <Container>
+                            <p>
+                                <Form>
+                                    <FormGroup>
+                                        <Label for="exampleText"
+                                               style={{color: 'white', textShadow: "1px 1px 2px black"}}>
+                                            <h3>Add a new item to your list:</h3></Label>
+                                        <Input type="textArea" name="text" id="exampleText" onChange={(event) => {
+                                            this.setState({value: event.target.value})
+                                        }} value={this.state.value}/>
+                                    </FormGroup>
+                                    <br/>
+                                    <Button color="secondary" onClick={e => {
+                                        e.preventDefault();
+                                        if (!this.state.value.trim()) {
+                                            return
+                                        }
+                                        this.props.dispatch(addTodo(this.state.value));
+                                        this.setState({value: ''});
+                                    }}>Add item</Button>
+                                    <br/>
+                                </Form>
+                            </p>
+                        </Container>
+                    </Jumbotron>
+                </Col>
             </div>
         )
     }
 }
 
-const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => ({
-    addTodo: text => dispatch(addTodo(text))
-});
-
-AddForm.propTypes = {
-    addTodo: PropTypes.func,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
+export default connect()(AddForm)
