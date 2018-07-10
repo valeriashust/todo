@@ -5,10 +5,13 @@ import App from './components/App';
 import {BrowserRouter} from 'react-router-dom'
 import registerServiceWorker from './components/registerServiceWorker';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import todoApp from './reducers/reducers'
+import {compose, createStore} from 'redux';
+import todoApp from './reducers/reducers';
+import persistState from 'redux-localstorage';
 
-const store = createStore(todoApp);
+
+const enhancer = compose (persistState());
+const store = createStore(todoApp,enhancer);
 
 
 ReactDOM.render((<BrowserRouter>
