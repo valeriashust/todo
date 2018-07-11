@@ -11,7 +11,8 @@ import persistState from 'redux-localstorage';
 
 
 const enhancer = compose (persistState());
-const store = createStore(todoApp,enhancer);
+const store = createStore(todoApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),enhancer,
+);
 
 
 ReactDOM.render((<BrowserRouter>
