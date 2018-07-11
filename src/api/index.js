@@ -1,9 +1,9 @@
 "use strict";
 
-const responses = require("./mock-responses.json");
+import responses from "./mock-responses.json";
 
 
-exports.fetch = (url, param) => {
+export default fetch = (url, param) => {
     return new Promise(((resolve, reject) => {
         setTimeout(() => {
             switch (url) {
@@ -24,6 +24,7 @@ exports.fetch = (url, param) => {
 }
 
 
+/*
 fetch('/todos').then(function (value) {
     console.log(value)
 }, function (reason) {
@@ -34,4 +35,4 @@ fetch('/todos/complete').then(function (value) {
     console.log(value)
 }, function (reason) {
     console.log(reason)
-});
+});*/

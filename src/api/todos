@@ -1,5 +1,5 @@
 "use strict";
-const fetch =  require('./index');
+import fetch from './index';
 
 function getAll() {
     fetch('/todos').then(function (value) {
