@@ -1,0 +1,12 @@
+"use strict";
+const fetch =  require('./index');
+
+function getAll() {
+    fetch('/todos').then(function (value) {
+        console.log(value)
+    }, function (reason) {
+        console.log(reason)
+    });
+}
+
+getAll();
