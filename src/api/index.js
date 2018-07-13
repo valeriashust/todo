@@ -1,38 +1,19 @@
-"use strict";
+
 
 import responses from "./mock-responses.json";
+import nextId from './nextId';
+import {id} from '../index'
 
 
-export default fetch = (url, param) => {
-    return new Promise(((resolve, reject) => {
+export default (url, param) => {
+    return new Promise(((resolve) => {
+
         setTimeout(() => {
-            switch (url) {
-                case '/todos': {
-                    resolve(responses.todos)
-                }
-                case '/todos/active': {
-                    resolve(responses.todos.active)
-                }
-                case '/todos/complete': {
-                    resolve(responses.todos.complete)
-                }
+            if (url ==='/todos' && param.method === 'post') {
+                resolve({...param.body, id: nextId(id)})
             }
+            resolve(responses[url][param.method || 'get']);
         }, 5000);
-
-
     }));
 }
 
-
-/*
-fetch('/todos').then(function (value) {
-    console.log(value)
-}, function (reason) {
-    console.log(reason)
-});
-
-fetch('/todos/complete').then(function (value) {
-    console.log(value)
-}, function (reason) {
-    console.log(reason)
-});*/

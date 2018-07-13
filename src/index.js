@@ -5,14 +5,13 @@ import App from './components/App';
 import {BrowserRouter} from 'react-router-dom'
 import registerServiceWorker from './components/registerServiceWorker';
 import {Provider} from 'react-redux';
-import {compose, createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import todoApp from './reducers/reducers';
-import persistState from 'redux-localstorage';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-
-const enhancer = compose (persistState());
-const store = createStore(todoApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),enhancer,
-);
+export let id = 0;
+const store = createStore(todoApp, composeWithDevTools(applyMiddleware(thunk)));
 
 
 ReactDOM.render((<BrowserRouter>

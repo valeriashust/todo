@@ -5,7 +5,7 @@ import {
     Form, FormGroup, Label, Col, Jumbotron, Container,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {addTodo} from "../actions/actions";
+import {addingTodo} from "../actions/actions";
 import {connect} from 'react-redux';
 
 class AddForm extends Component {
@@ -19,11 +19,9 @@ class AddForm extends Component {
 
     render() {
         return (
-            <div>
                 <Col>
                     <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
                         <Container>
-                            <p>
                                 <Form>
                                     <FormGroup>
                                         <Label for="exampleText"
@@ -39,16 +37,15 @@ class AddForm extends Component {
                                         if (!this.state.value.trim()) {
                                             return
                                         }
-                                        this.props.dispatch(addTodo(this.state.value));
+                                        let newTodo = {text: this.state.value, completed: false};
+                                        this.props.dispatch(addingTodo(newTodo));
                                         this.setState({value: ''});
                                     }}>Add item</Button>
                                     <br/>
                                 </Form>
-                            </p>
                         </Container>
                     </Jumbotron>
                 </Col>
-            </div>
         )
     }
 }

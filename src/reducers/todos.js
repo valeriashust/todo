@@ -1,21 +1,15 @@
 import {ADD_TODO, DELETE_TODO, TOGGLE_TODO, UPDATE_TODO} from "../actions/actions";
 
 
-function todos(state = {list: [], currentId: 0}, action) {
+function todos(state = {list: []}, action) {
     switch (action.type) {
         case ADD_TODO:
             return {
                 ...state,
                 list: [
                     ...state.list,
-                    {
-                        id: state.currentId,
-                        text: action.text,
-                        completed: false,
-                    },
-
-                ],
-                currentId: state.currentId + 1,
+                    action.todo,
+                ]
             }
                 ;
         case

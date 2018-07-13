@@ -1,28 +1,19 @@
 {
-  "todos": {
-    "active": [
-      {
-        "text": "wash the dishes",
-        "id": "0"
-      },
-      {
-        "text": "clean the room",
-        "id": "1"
-      },
-      {
-        "text": "check email",
-        "id": "2"
-      }
-    ],
-    "complete": [
-      {
-        "text": "sleep",
-        "id": "3"
-      },
-      {
-        "text": "do homework",
-        "id": "4"
-      }
-    ]
+  "/todos": {
+    "post": "Your toDo was successfully added!",
+    "get": {
+
+    },
+    "delete": {
+
+    },
+    "put": {
+
+    }
+  },
+  "/visibility-filter": {
+    "post": {
+
+    }
   }
 }
