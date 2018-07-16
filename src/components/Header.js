@@ -8,14 +8,17 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
+import {gettingAllTodos} from "../actions/actions";
+import {connect} from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false
         };
+        this.props.dispatch(gettingAllTodos());
     }
 
     toggle = () => {
@@ -42,3 +45,4 @@ export default class Header extends Component {
         )
     }
 };
+export default connect()(Header)

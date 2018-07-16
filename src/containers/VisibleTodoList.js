@@ -1,6 +1,11 @@
 import {connect} from 'react-redux'
 import ListOfItems from '../components/ListOfItems'
-import {deleteTodo, toggleTodo, updateTodo, VisibilityFilters} from '../actions/actions'
+import {
+    deletingTodo,
+    togglingTodo,
+    updatingTodo,
+    VisibilityFilters,
+} from '../actions/actions'
 
 
 export const getVisibleTodos = (todos, filter) => {
@@ -18,14 +23,14 @@ export const getVisibleTodos = (todos, filter) => {
 
 
 const mapStateToProps = state => (
-    {todos: getVisibleTodos(state.todos.list, state.visibilityFilter)}
+    {todos: getVisibleTodos(state.todos, state.visibilityFilter)}
 
 );
 
 const mapDispatchToProps = dispatch => ({
-    toggleTodo: id => dispatch(toggleTodo(id)),
-    deleteTodo: id => dispatch(deleteTodo(id)),
-    updateTodo: (text, id) => dispatch(updateTodo(text, id)),
+    toggleTodo: id => dispatch(togglingTodo(id)),
+    deleteTodo: id => dispatch(deletingTodo(id)),
+    updateTodo: (text, id) => dispatch(updatingTodo(text, id)),
 });
 
 

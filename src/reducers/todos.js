@@ -1,42 +1,27 @@
 import {ADD_TODO, DELETE_TODO, TOGGLE_TODO, UPDATE_TODO} from "../actions/actions";
 
 
-function todos(state = {list: []}, action) {
+function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
-            return {
+            return [
                 ...state,
-                list: [
-                    ...state.list,
-                    action.todo,
-                ]
-            }
-                ;
-        case
-        TOGGLE_TODO: {
-            const newList = state.list.map(todo =>
+                action.todo
+            ];
+        case TOGGLE_TODO: {
+           return state.map(todo =>
                 (todo.id === action.id)
                     ? {...todo, completed: !todo.completed}
-                    : todo
-            );
-            return {
-                ...state,
-                list: newList
-            };
+                    : todo);
         }
-        case
-        DELETE_TODO: {
-            const newList = state.list.filter(todo => todo.id !== action.id);
-            return {...state, list: newList};
+        case DELETE_TODO: {
+            return state.filter(todo => todo.id !== action.id);
         }
-        case
-        UPDATE_TODO: {
-            const newList = state.list.map(todo =>
+        case UPDATE_TODO: {
+            return state.map(todo =>
                 (todo.id === action.id)
                     ? {...todo, text: action.text}
-                    : todo
-            );
-            return {...state, list: newList}
+                    : todo);
         }
         default:
             return state

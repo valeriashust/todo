@@ -10,8 +10,8 @@ import todoApp from './reducers/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-export let id = 0;
-const store = createStore(todoApp, composeWithDevTools(applyMiddleware(thunk)));
+
+export const store = createStore(todoApp, composeWithDevTools(applyMiddleware(thunk)));
 
 
 ReactDOM.render((<BrowserRouter>

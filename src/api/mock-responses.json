@@ -1,19 +1,27 @@
 {
   "/todos": {
     "post": "Your toDo was successfully added!",
-    "get": {
-
-    },
-    "delete": {
-
-    },
-    "put": {
-
-    }
+    "get": [
+      {
+        "text": "wash the dishes",
+        "completed": false,
+        "id": 100
+      },
+      {
+        "text": "read a book",
+        "completed": false,
+        "id": 101
+      },
+      {
+        "text": "clean the kitchen",
+        "completed": false,
+        "id": 102
+      }
+    ],
+    "delete": "Your toDo was successfully deleted!",
+    "put": "Successfully updated!"
   },
   "/visibility-filter": {
-    "post": {
-
-    }
+    "put": "Successfully updated filter!"
   }
 }
