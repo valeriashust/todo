@@ -5,10 +5,11 @@ import {
     Form, FormGroup, Label, Col, Jumbotron, Container,
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {addingTodo} from "../actions/actions";
-import {connect} from 'react-redux';
+import {BeatLoader} from "react-spinners";
+import Center from 'react-center';
 
-class AddForm extends Component {
+
+export default class AddForm extends Component {
 
     constructor(props) {
         super(props);
@@ -20,12 +21,12 @@ class AddForm extends Component {
     render() {
         return (
                 <Col>
-                    <Jumbotron className="insideJum" style={{backgroundColor: 'mediumPurple'}}>
+                    <Jumbotron className="insideJum" style={{backgroundColor: 'lavender'}}>
                         <Container>
                                 <Form>
                                     <FormGroup>
                                         <Label for="exampleText"
-                                               style={{color: 'white', textShadow: "1px 1px 2px black"}}>
+                                               style={{color: 'black'}}>
                                             <h3>Add a new item to your list:</h3></Label>
                                         <Input type="textArea" name="text" id="exampleText" onChange={(event) => {
                                             this.setState({value: event.target.value})
@@ -38,17 +39,18 @@ class AddForm extends Component {
                                             return
                                         }
                                         let newTodo = {text: this.state.value, completed: false};
-                                        this.props.dispatch(addingTodo(newTodo));
+                                        this.props.addingTodo(newTodo);
                                         this.setState({value: ''});
                                     }}>Add item</Button>
                                     <br/>
                                 </Form>
                         </Container>
                     </Jumbotron>
+                    <Center>
+                        <BeatLoader color={'mediumPurple'}
+                                    loading={this.props.loading} />
+                    </Center>
                 </Col>
         )
     }
 }
-
-
-export default connect()(AddForm)

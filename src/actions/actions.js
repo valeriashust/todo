@@ -6,6 +6,7 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
+export const SET_LOADING = 'SET_LOADING';
 
 
 export const VisibilityFilters = {
@@ -34,6 +35,10 @@ export const deleteTodo = id => ({
     id
 });
 
+export const changeLoading = () => ({
+    type: 'SET_LOADING'
+});
+
 export const updateTodo = (text, id) => ({
     type: 'UPDATE_TODO',
     text,
@@ -42,8 +47,10 @@ export const updateTodo = (text, id) => ({
 
 export function addingTodo(todo) {
     return function (dispatch) {
+        dispatch(changeLoading());
         return api.add(todo).then(response => {
             console.log(response);
+            dispatch(changeLoading());
             dispatch(addTodo(response))
         })
     }
@@ -61,12 +68,14 @@ export function togglingTodo(id) {
 
 export function deletingTodo(id) {
     return function (dispatch) {
+        dispatch(changeLoading());
         let state = store.getState();
         let todoForDeleting = state.todos.find((todo) => {
             if (todo.id === id) return todo; else return {}
         });
         return api.deleteItem(todoForDeleting).then(response => {
             console.log(response);
+            dispatch(changeLoading());
             dispatch(deleteTodo(id));
         })
     }
@@ -84,8 +93,10 @@ export function updatingTodo(text, id) {
 
 export function settingVisibilityFilter(filter) {
     return function (dispatch) {
+        dispatch(changeLoading());
         return api.visibilityFilter(filter).then(response => {
             console.log(response);
+            dispatch(changeLoading());
             dispatch(setVisibilityFilter(filter));
         })
     }
@@ -93,8 +104,10 @@ export function settingVisibilityFilter(filter) {
 
 export function gettingAllTodos() {
     return function (dispatch) {
+        dispatch(changeLoading());
         return api.getAll().then(response => {
             console.log(response);
+            dispatch(changeLoading());
             response.map(todo => dispatch(addTodo(todo)));
         })
     }

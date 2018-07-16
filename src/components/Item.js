@@ -35,7 +35,7 @@ export default class Item extends Component {
                     </InputGroup>
                 </Col>
                 <Col sm={{size: 'auto', offset: 1}}>
-                    <Button color="primary" onClick={this.onClick}>Delete</Button>
+                    <Button color="secondary" onClick={this.onClick}>Delete</Button>
                 </Col>
             </Row>
         )

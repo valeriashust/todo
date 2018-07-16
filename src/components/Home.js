@@ -9,8 +9,12 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import VisibleTodoList from "../containers/VisibleTodoList";
 import Footer from "./Footer";
+import {BeatLoader} from 'react-spinners';
+import Center from 'react-center';
+
 
 export default class Home extends Component {  //компонент-контейнер
+
 
     render() {
         return (
@@ -39,6 +43,10 @@ export default class Home extends Component {  //компонент-контей
 
                     </Container>
                 </Jumbotron>
+                <Center>
+                <BeatLoader color={'mediumPurple'}
+                            loading={this.props.loading} />
+                </Center>
             </div>
         )
     }
